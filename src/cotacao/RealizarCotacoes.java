@@ -5,7 +5,7 @@ import classes.Moeda;
 import java.util.Objects;
 
 /**
- * Buscar a última cotação do Dólar Americano, Dólar Americano Turismo e do Euro
+ * Buscar a última cotação do Dólar, Euro, Franco Suíço, Libra Esterlina e Peso Chileno
  *
  * @author Diego Mendes Rodrigues
  */
@@ -14,18 +14,28 @@ public class RealizarCotacoes {
     Moeda cotacaoDolar;
     Moeda cotacaoDolarTurismo;
     Moeda cotacaoEuro;
+    Moeda cotacaoFrancoSuico;
+    Moeda cotacaoLibraEsterlina;
+    Moeda cotacaoPesoChileno;
 
-    /**
-     * Buscar a última cotação do Dólar Americano, Dólar Americano Turismo e do Euro
-     */
     public RealizarCotacoes() {
-        cotacaoDolar = cotacao.realizarCotacao("USD");
-        cotacaoDolarTurismo = cotacao.realizarCotacao("USDT");
-        cotacaoEuro = cotacao.realizarCotacao("EUR");
+        novasCotacoes();
     }
 
     /**
-     * Exibir as cotações do Dólar Americano Comercial, Dólar Americano Turismo e do Euro no terminal
+     * Buscar a última cotação das moedas
+     */
+    public void novasCotacoes() {
+        cotacaoDolar = cotacao.realizarCotacao("USD");
+        cotacaoDolarTurismo = cotacao.realizarCotacao("USDT");
+        cotacaoEuro = cotacao.realizarCotacao("EUR");
+        cotacaoFrancoSuico = cotacao.realizarCotacao("CHF");
+        cotacaoLibraEsterlina = cotacao.realizarCotacao("GBP");
+        cotacaoPesoChileno = cotacao.realizarCotacao("CLP");
+    }
+
+    /**
+     * Exibir as cotações das moedas no terminal
      */
     public void exibirCotacoesTerminal() {
         /* Exibir os resultados */
@@ -45,6 +55,24 @@ public class RealizarCotacoes {
         System.out.println("Data e hora da cotação.: " + this.getCotacaoEuro().getDataCotacaoFormatada());
         System.out.println("Cotação de venda.......: € 1,00 = R$ " + this.getCotacaoEuro()
                 .getCotacaoFormatada());
+        System.out.println(" ");
+
+        System.out.println("# Franco Suíço");
+        System.out.println("Data e hora da cotação.: " + this.getCotacaoFrancoSuico().getDataCotacaoFormatada());
+        System.out.println("Cotação de venda.......: € 1,00 = R$ " + this.getCotacaoFrancoSuico()
+                .getCotacaoFormatada());
+        System.out.println(" ");
+
+        System.out.println("# Libra Esterlina");
+        System.out.println("Data e hora da cotação.: " + this.getCotacaoLibraEsterlina().getDataCotacaoFormatada());
+        System.out.println("Cotação de venda.......: € 1,00 = R$ " + this.getCotacaoLibraEsterlina()
+                .getCotacaoFormatada());
+        System.out.println(" ");
+
+        System.out.println("# Peso Chileno");
+        System.out.println("Data e hora da cotação.: " + this.getCotacaoPesoChileno().getDataCotacaoFormatada());
+        System.out.println("Cotação de venda.......: € 1,00 = R$ " + this.getCotacaoPesoChileno()
+                .getCotacaoFormatada());
     }
 
     public Moeda getCotacaoDolar() {
@@ -59,13 +87,27 @@ public class RealizarCotacoes {
         return cotacaoEuro;
     }
 
+    public Moeda getCotacaoFrancoSuico() {
+        return cotacaoFrancoSuico;
+    }
+
+    public Moeda getCotacaoLibraEsterlina() {
+        return cotacaoLibraEsterlina;
+    }
+
+    public Moeda getCotacaoPesoChileno() {
+        return cotacaoPesoChileno;
+    }
+
     @Override
     public String toString() {
         return "RealizarCotacoes{" +
-                "cotacao=" + cotacao +
-                ", cotacaoDolar=" + cotacaoDolar +
+                "cotacaoDolar=" + cotacaoDolar +
                 ", cotacaoDolarTurismo=" + cotacaoDolarTurismo +
                 ", cotacaoEuro=" + cotacaoEuro +
+                ", cotacaoFrancoSuico=" + cotacaoFrancoSuico +
+                ", cotacaoLibraEsterlina=" + cotacaoLibraEsterlina +
+                ", cotacaoPesoChileno=" + cotacaoPesoChileno +
                 '}';
     }
 
@@ -74,11 +116,11 @@ public class RealizarCotacoes {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         RealizarCotacoes that = (RealizarCotacoes) o;
-        return Objects.equals(cotacao, that.cotacao) && Objects.equals(cotacaoDolar, that.cotacaoDolar) && Objects.equals(cotacaoDolarTurismo, that.cotacaoDolarTurismo) && Objects.equals(cotacaoEuro, that.cotacaoEuro);
+        return Objects.equals(cotacao, that.cotacao) && Objects.equals(cotacaoDolar, that.cotacaoDolar) && Objects.equals(cotacaoDolarTurismo, that.cotacaoDolarTurismo) && Objects.equals(cotacaoEuro, that.cotacaoEuro) && Objects.equals(cotacaoFrancoSuico, that.cotacaoFrancoSuico) && Objects.equals(cotacaoLibraEsterlina, that.cotacaoLibraEsterlina) && Objects.equals(cotacaoPesoChileno, that.cotacaoPesoChileno);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(cotacao, cotacaoDolar, cotacaoDolarTurismo, cotacaoEuro);
+        return Objects.hash(cotacao, cotacaoDolar, cotacaoDolarTurismo, cotacaoEuro, cotacaoFrancoSuico, cotacaoLibraEsterlina, cotacaoPesoChileno);
     }
 }

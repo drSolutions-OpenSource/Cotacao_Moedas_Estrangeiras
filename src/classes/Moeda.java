@@ -169,12 +169,12 @@ public class Moeda {
     }
 
     /**
-     * Devolver a cotação da moeda formatada em 99,9999
+     * Devolver a cotação da moeda formatada em 999,9999
      *
      * @return sendo a contação da moeda formatada
      */
     public String getCotacaoFormatada() {
-        DecimalFormat df = new DecimalFormat("##.0000");
+        DecimalFormat df = new DecimalFormat("##0.0000");
         BigDecimal valor = new BigDecimal(this.getAsk());
         return df.format(valor);
     }

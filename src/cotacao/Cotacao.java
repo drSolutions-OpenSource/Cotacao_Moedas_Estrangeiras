@@ -10,11 +10,14 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 /**
- * Obter a contação autal de moedas estrangeiras através do webservice: https://economia.awesomeapi.com.br/last/USD-BRL
+ * Obter a contação atual de moedas estrangeiras através do webservice: https://economia.awesomeapi.com.br/last/USD-BRL
  * As seguintes cotações estão disponíveis:
  * - Dólar Americano Comercial (USD-BRL)
  * - Dólar Americano Turismo (USD-BRLT)
  * - Euro (EUR-BRL)
+ * - Franco Suíço (CHF-BRL)
+ * - Libra Esterlina (GBP-BRL)
+ * - Peso Chileno (CLP-BRL)
  *
  * @author Diego Mendes Rodrigues
  */
@@ -23,9 +26,9 @@ public class Cotacao {
     static int codigoSucesso = 200;
 
     /**
-     * Realiza a cotação atual de uma moeda estrangeira, podendo ser Dólar Americano (comercial ou turismo) e Euro
+     * Realiza a cotação atual de uma moeda estrangeira
      *
-     * @param moeda sendo a moeda em que a cotação será realizada (USD, USDT ou EUR)
+     * @param moeda sendo a moeda em que a cotação será realizada (USD, USDT, EUR, CHF, GBP ou CLP)
      * @return a cotação atual da moeda como umo instância da classe Maeda
      */
     public Moeda realizarCotacao(String moeda) {
@@ -35,6 +38,12 @@ public class Cotacao {
             return realizarCotacaoMoeda("USD-BRLT");
         } else if (moeda.equalsIgnoreCase("EUR")) {
             return realizarCotacaoMoeda("EUR-BRL");
+        } else if (moeda.equalsIgnoreCase("CHF")) {
+            return realizarCotacaoMoeda("CHF-BRL");
+        } else if (moeda.equalsIgnoreCase("GBP")) {
+            return realizarCotacaoMoeda("GBP-BRL");
+        } else if (moeda.equalsIgnoreCase("CLP")) {
+            return realizarCotacaoMoeda("CLP-BRL");
         }
         return new Moeda();
     }
@@ -42,8 +51,8 @@ public class Cotacao {
     /**
      * Realiza a cotação da moeda no webservice
      *
-     * @param moedaCotada sendo a moeda em que a cotação será realizada (USD-BRL, USD-BRLT ou EUR-BRL)
-     * @return
+     * @param moedaCotada sendo a moeda em que a cotação será realizada
+     * @return a cotação atual da moeda como umo instância da classe Maeda
      */
     private Moeda realizarCotacaoMoeda(String moedaCotada) {
         String urlParaChamada = webService + moedaCotada;
@@ -53,8 +62,10 @@ public class Cotacao {
             URL url = new URL(urlParaChamada);
             HttpURLConnection conexao = (HttpURLConnection) url.openConnection();
 
-            if (conexao.getResponseCode() != codigoSucesso)
-                throw new RuntimeException("HTTP error code : " + conexao.getResponseCode());
+            if (conexao.getResponseCode() != codigoSucesso) {
+//                throw new RuntimeException("HTTP error code : " + conexao.getResponseCode());
+                System.out.println("Falha resposta da requisição realizada com a API");
+            }
 
             BufferedReader resposta = new BufferedReader(new InputStreamReader((conexao.getInputStream())));
             String jsonEmString = ConverterJsonString.converteJsonEmString(resposta);
