@@ -1,4 +1,4 @@
-<h1 align="center">Cotação do Dólar e do Euro</h1>
+<h1 align="center">Cotação de Moedas Estrangeiras</h1>
 <p align="center"><i>Repositório para armazenar as códigos em Java criados para um sistema que busca a última cotação 
 de venda do Dólar Americano Comercial, Dólar Americano Turismo, Euro, Franco Suíço, Libra Esterlina e do Peso Chileno</i></p>
 
